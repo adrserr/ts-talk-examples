@@ -51,7 +51,7 @@ type Modifiable<Type> = {
 interface Asset {
   // some attributes
 }
-function getAssets<T extends number | any>(
+function getAssets<T extends number | string>( // limit possible types
   id?: T
 ): T extends number ? Asset : Asset[] {
   if (id) return {} as any //function can't narrow id type, so it can't narrow the return type
@@ -64,16 +64,16 @@ getAssets() // Asset[]
 // Promisify Type
 interface SyncService {
   baseUrl: string
-  getStuff(baseUrl: string, id: number): string[]
+  getStuff(): string[]
 }
 
 // Instead of rewriting a new type, we are going to create an utility that converts our existing type
 // prettier-ignore
-type Promisify<Type> = {
-  [Key in keyof Type]: Type[Key] extends (...args: any) => any ? (...args: any) => Promise<any> : Type[Key]
-}
 // type Promisify<Type> = {
-//   [Key in keyof Type]: (Type[Key] extends (...args: infer Arguments) => infer Return ?  (...args: Arguments) => Promise<Return> : Type[Key])
+//   [Key in keyof Type]: Type[Key] extends (...args: any) => any ? (...args: any) => Promise<any> : Type[Key]
 // }
+type Promisify<Type> = {
+  [Key in keyof Type]: (Type[Key] extends (...args: infer Arguments) => infer Return ?  (...args: Arguments) => Promise<Return> : Type[Key])
+}
 
 type AsyncService = Promisify<SyncService>

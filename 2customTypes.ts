@@ -1,6 +1,6 @@
 // TYPE ALIASES
+type Foot = number
 
-// UNION
 type Rectangle = {
   kind: "rectangle"
   width: number
@@ -12,6 +12,7 @@ type Circle = {
   radius: number
 }
 
+// UNION
 type Shape = Rectangle | Circle
 
 // INTERSECTION
@@ -133,15 +134,3 @@ function getProducts(id?: number, date?: Date) {
 getProducts()
 getProducts(12)
 getProducts(null, new Date())
-
-type G<T> = {
-  t: T
-  fn: (t: T) => T
-}
-class AA implements G<string> {
-  t: string
-  fn(t: string) {
-    return ""
-  }
-}
-interface AAA extends G<string> {}

@@ -65,6 +65,8 @@ value = "Now I am a String"
 // TYPE WIDENING AND NARROWING
 // @strict: true
 const y = null
+const n = 12
+const s = "Hello"
 let x = 0 // NOT GOOD FIXME: refine it a bit the explanation of widening and add tsconfig to get type checking
 x = null
 // https://www.typescriptlang.org/play?strictNullChecks=false#code/DYUwLgBAHhC8EDsCuxgFgBQpIE84QAZM95lUg
